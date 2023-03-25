@@ -1,5 +1,7 @@
 package _05_Intro_To_Ternary_Operator;
 
+import java.util.Scanner;
+
 public class TernaryOperatorDemo {
 
     /*
@@ -40,8 +42,16 @@ public class TernaryOperatorDemo {
          * until the response says "FIRE!".
          */
         
+        Scanner scanner = new Scanner(System.in);
+        String season;
+        do {
+        System.out.println("What season is it?");
+        season = scanner.nextLine();
+        System.out.println("line just read: "+ season);
+        season = season.equalsIgnoreCase("duck season")  ? "FIRE!" : "rabbit season";
+        } while(!season.equals("FIRE!"));
         
-        
+        scanner.close();
         /*
          * WARNING: Ternary operators can be used to improve the readability of
          * your code if used sparingly for very simple if/else statements.
