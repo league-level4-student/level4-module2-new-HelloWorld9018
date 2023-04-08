@@ -1,5 +1,7 @@
 package _06_Console_Store;
 
+import java.util.Scanner;
+
 public class ConsoleStore {
 
     /*
@@ -37,7 +39,32 @@ public class ConsoleStore {
      */
 
     public static void main(String[] args) {
-
+    	Boolean thing = false;
+    	Scanner scanner = new Scanner(System.in);
+    	String input;
+    	double stipend = 25.00;
+    	double cost = 0;
+    	do {
+    		System.out.println("Directions: Type in the name of the item to add it to cart. \nType \"remove\" before "
+    				+ "the name of an item in your cart to \nremove an item in your cart."
+    				+ " Type \"view cart\" to view your \ncart. Type \"check out\" when you are "
+    				+ "ready to check out. \n\nChips - $1.99\nSalad Mix - $3.99\nBlanket - $8.50\nPokemon cards - $9.90\n");
+    		
+    		input  = scanner.nextLine().toLowerCase();
+    		switch (input) {
+    		case "chips":
+    		
+    		case "salad mix":
+    			
+    		case "blanket":
+    		
+    		case "pokemon cards":
+    		
+    		}
+    		
+    	}while (stipend >= cost);
+    	
+    	System.out.println("You do not have enough money left to purchase this");
     }
 
 }

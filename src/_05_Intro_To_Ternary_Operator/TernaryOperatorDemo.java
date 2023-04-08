@@ -47,8 +47,9 @@ public class TernaryOperatorDemo {
         do {
         System.out.println("What season is it?");
         season = scanner.nextLine();
-        System.out.println("line just read: "+ season);
+        
         season = season.equalsIgnoreCase("duck season")  ? "FIRE!" : "rabbit season";
+        System.out.println(season);
         } while(!season.equals("FIRE!"));
         
         scanner.close();
