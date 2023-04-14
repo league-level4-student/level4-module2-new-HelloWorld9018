@@ -43,28 +43,53 @@ public class ConsoleStore {
     	Scanner scanner = new Scanner(System.in);
     	String input;
     	double stipend = 25.00;
-    	double cost = 0;
-    	do {
+    	double totalCost = 0;
+    	/*double chipsCost = 1.99;
+    	double saladCost = 3.99;
+    	double blanketCost = 8.50;
+    	double pokemonCost = 9.90;*/
+    	Chips chips = new Chips(1.99);
+    	//do all things this way!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    	System.out.println(chips.getPrice());
+    			
+    	/*do {
     		System.out.println("Directions: Type in the name of the item to add it to cart. \nType \"remove\" before "
     				+ "the name of an item in your cart to \nremove an item in your cart."
     				+ " Type \"view cart\" to view your \ncart. Type \"check out\" when you are "
     				+ "ready to check out. \n\nChips - $1.99\nSalad Mix - $3.99\nBlanket - $8.50\nPokemon cards - $9.90\n");
     		
     		input  = scanner.nextLine().toLowerCase();
+    		//make into object... and use getter
     		switch (input) {
     		case "chips":
-    		
+    			if(stipend >= chipsCost) {
+    			totalCost += chipsCost;
+    			}
+    			break;
     		case "salad mix":
-    			
+    			if(stipend >= saladCost) {
+    			totalCost += saladCost;
+    			}
+    			break;
     		case "blanket":
-    		
+    			if(stipend >= blanketCost) {
+    			totalCost += blanketCost;
+    			}
+    			break;
     		case "pokemon cards":
-    		
+    			if(stipend >= pokemonCost) {
+    			totalCost += pokemonCost;
+    			}
+    			break;
     		}
     		
-    	}while (stipend >= cost);
-    	
-    	System.out.println("You do not have enough money left to purchase this");
+    		stipend -= totalCost;
+    		
+    	}while (stipend >= totalCost);
+    	 */
+
+    	String money = String.format("%.2f", stipend);
+    	System.out.println("You do not have enough money left to purchase this. Your Money: " + money);
     }
 
 }

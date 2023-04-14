@@ -1,5 +1,5 @@
 package _06_Console_Store;
 
-public class NonFood {
+public class NonFood extends StoreItem{
 
 }
