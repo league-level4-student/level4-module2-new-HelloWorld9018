@@ -2,9 +2,16 @@ package _06_Console_Store;
 
 import java.util.Scanner;
 
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+
+import _01_Generics_Vs_Object.GenericsList;
+
 public class ConsoleStore {
 
-    /*
+     /*
      * Write a program that simulates shopping in a store using the Scanner and
      * the classes in Generics_Store.
      * 
@@ -37,59 +44,101 @@ public class ConsoleStore {
      * print out a receipt showing their name, the individual prices of the
      * items and their total.
      */
-
+	static GenericsList<String> generics;
+	
     public static void main(String[] args) {
+    	
     	Boolean thing = false;
     	Scanner scanner = new Scanner(System.in);
     	String input;
     	double stipend = 25.00;
     	double totalCost = 0;
-    	/*double chipsCost = 1.99;
-    	double saladCost = 3.99;
-    	double blanketCost = 8.50;
-    	double pokemonCost = 9.90;*/
+
     	Chips chips = new Chips(1.99);
-    	//do all things this way!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    	System.out.println(chips.getPrice());
-    			
-    	/*do {
-    		System.out.println("Directions: Type in the name of the item to add it to cart. \nType \"remove\" before "
-    				+ "the name of an item in your cart to \nremove an item in your cart."
-    				+ " Type \"view cart\" to view your \ncart. Type \"check out\" when you are "
-    				+ "ready to check out. \n\nChips - $1.99\nSalad Mix - $3.99\nBlanket - $8.50\nPokemon cards - $9.90\n");
-    		
+    	SaladMix salad = new SaladMix(3.99);
+    	Blanket blanket = new Blanket(8.50);
+    	PokemonCards pokemon = new PokemonCards(9.90);
+    	
+    	double chipPrice = chips.getPrice();
+    	double saladPrice = salad.getPrice();
+    	double blanketPrice = blanket.getPrice();
+    	double pokemonPrice = pokemon.getPrice();
+    	
+        generics = new GenericsList<String>();
+    	
+		System.out.println("Directions: Type in the name of the item to add it to cart. \nType \"remove\" before "
+				+ "the name of an item in your cart to \nremove an item in your cart."
+				+ " Type \"view cart\" to view your \ncart. Type \"check out\" when you are "
+				+ "ready to check out. \n\nChips - $1.99\nSalad Mix - $3.99\nBlanket - $8.50\nPokemon cards - $9.90\n");		
+    	
+    	do {
     		input  = scanner.nextLine().toLowerCase();
     		//make into object... and use getter
     		switch (input) {
     		case "chips":
-    			if(stipend >= chipsCost) {
-    			totalCost += chipsCost;
+    			if(stipend >= chipPrice) {
+    			totalCost += chipPrice;
+    			generics.add("chips");
     			}
     			break;
     		case "salad mix":
-    			if(stipend >= saladCost) {
-    			totalCost += saladCost;
+    			if(stipend >= saladPrice) {
+    			totalCost += saladPrice;
+    			generics.add("salad");
     			}
     			break;
     		case "blanket":
-    			if(stipend >= blanketCost) {
-    			totalCost += blanketCost;
+    			if(stipend >= blanketPrice) {
+    			totalCost += blanketPrice;
+    			generics.add("blaket");
     			}
     			break;
     		case "pokemon cards":
-    			if(stipend >= pokemonCost) {
-    			totalCost += pokemonCost;
+    			if(stipend >= pokemonPrice) {
+    			totalCost += pokemonPrice;
+    			generics.add("pokemon");
     			}
+    			break;
+    		case "view cart":
+    			
+    			viewCart();
+    			break;
+    		case "check out":
+    			System.out.println("Your total cost is $" + totalCost + ". Thank you for shopping at Lily's Digital Market");
     			break;
     		}
     		
-    		stipend -= totalCost;
-    		
     	}while (stipend >= totalCost);
-    	 */
-
+    	
     	String money = String.format("%.2f", stipend);
     	System.out.println("You do not have enough money left to purchase this. Your Money: " + money);
+    	
+    	if(input.equalsIgnoreCase("view cart")) {
+    		System.out.println("Viewing cart");
+    	}
+    	
+
+    	
     }
+
+	private static void viewCart() {
+		// TODO Auto-generated method stub
+		System.out.println("viewing cart");
+		JFrame frame = new JFrame();
+		JPanel panel = new JPanel();
+		
+		for(int i = 0; i<generics.length(); i++) {
+			JLabel label = new JLabel();
+			if(generics.get(i).equals("")) {
+				//label.add	image      I need to add images here, depending on what store item it is
+			}
+			
+			panel.add(label); 
+		}
+		
+		frame.setVisible(true);
+		frame.add(panel);
+		//JOptionPane.
+	}
 
 }
