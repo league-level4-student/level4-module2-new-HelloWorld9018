@@ -1,13 +1,17 @@
 package _06_Console_Store;
 
+import java.io.IOException;
 import java.util.Scanner;
 
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import _01_Generics_Vs_Object.GenericsList;
+import _02_Generics_Store.Cart;
 
 public class ConsoleStore {
 
@@ -48,7 +52,6 @@ public class ConsoleStore {
 	
     public static void main(String[] args) {
     	
-    	Boolean thing = false;
     	Scanner scanner = new Scanner(System.in);
     	String input;
     	double stipend = 25.00;
@@ -74,71 +77,143 @@ public class ConsoleStore {
     	do {
     		input  = scanner.nextLine().toLowerCase();
     		//make into object... and use getter
-    		switch (input) {
+    		switch (input.toLowerCase()) {
+    		//___________________________________ADDING ITEMS TO CART_____________________
     		case "chips":
     			if(stipend >= chipPrice) {
     			totalCost += chipPrice;
+    			stipend-=chipPrice;
     			generics.add("chips");
+    			System.out.println("chips added to cart");
+    			}else {
+    				printWarning(stipend);
     			}
     			break;
+    			
     		case "salad mix":
     			if(stipend >= saladPrice) {
     			totalCost += saladPrice;
+    			stipend-=saladPrice;
     			generics.add("salad");
+    			System.out.println("salad mix added to cart");
+    			}else {
+    				printWarning(stipend);
     			}
     			break;
+    			
     		case "blanket":
     			if(stipend >= blanketPrice) {
     			totalCost += blanketPrice;
-    			generics.add("blaket");
+    			stipend-=blanketPrice;
+    			generics.add("blanket");
+    			System.out.println("blanket added to cart");
+    			}else {
+    				printWarning(stipend);
     			}
     			break;
+    			
     		case "pokemon cards":
     			if(stipend >= pokemonPrice) {
     			totalCost += pokemonPrice;
+    			stipend-=pokemonPrice;
     			generics.add("pokemon");
+    			System.out.println("pokemon cards added to cart");
+    			}else {
+    				printWarning(stipend);
     			}
     			break;
+    		//__________________________________________REMOVING ITEMS FROM CART_________
+    				case "remove chips":
+    					//check if item has already been added to generic array
+    					//reverse add/subtract
+    					break;
+    					
+    				case "remove salad mix":
+    					break;
+    					
+    				case "remove blanket":
+    					break;
+    				case "remove pokemon cards":
+    					break;
+    		//_______________________________________OTHER COMMANDS_______________________
     		case "view cart":
-    			
     			viewCart();
     			break;
+    			
     		case "check out":
     			System.out.println("Your total cost is $" + totalCost + ". Thank you for shopping at Lily's Digital Market");
+    			scanner.close();
     			break;
+    		default:
+    			System.out.println("Invalid input. Double check for typos");
     		}
     		
-    	}while (stipend >= totalCost);
+    	}while (stipend>=0);
     	
-    	String money = String.format("%.2f", stipend);
-    	System.out.println("You do not have enough money left to purchase this. Your Money: " + money);
+    
     	
-    	if(input.equalsIgnoreCase("view cart")) {
-    		System.out.println("Viewing cart");
-    	}
+    //	if(input.equalsIgnoreCase("view cart")) {
+    	//	System.out.println("Viewing cart");
+    //	}
     	
 
     	
     }
 
-	private static void viewCart() {
+	private static void printWarning(double stipend) {
+		// TODO Auto-generated method stub
+		String money = String.format("%.2f", (stipend));
+    	System.out.println("You won't have enough money to purchase this. Your money remaining: $" + money);
+	}
+
+	public static void viewCart() {
 		// TODO Auto-generated method stub
 		System.out.println("viewing cart");
 		JFrame frame = new JFrame();
 		JPanel panel = new JPanel();
 		
+			frame.setVisible(true);
+		frame.add(panel);
+		
+		//= new JLabel(loadImage("salad_mix_resized.png"));
+		//panel.add(label);
+		
+		
 		for(int i = 0; i<generics.length(); i++) {
-			JLabel label = new JLabel();
-			if(generics.get(i).equals("")) {
-				//label.add	image      I need to add images here, depending on what store item it is
-			}
+			//JLabel label = new JLabel();
 			
-			panel.add(label); 
+			switch(generics.get(i)) {
+				//label.add	image      I need to add images here, depending on what store item it is
+				case "blanket":
+					panel.add(new JLabel(loadImage("blanketResized.png"))); 
+					break;	
+				case "salad":
+					panel.add(new JLabel(loadImage("salad_mix_resized.png")));
+					break;
+				case "chips":
+					panel.add(new JLabel(loadImage("transparentChips.png")));
+					break;
+				case "pokemon":
+					panel.add(new JLabel(loadImage("transparentPokemon.png")));
+					break;
+			}
+			frame.pack();
+				
 		}
 		
-		frame.setVisible(true);
-		frame.add(panel);
+	
 		//JOptionPane.
 	}
+
+	  @SuppressWarnings("rawtypes")
+	    public static ImageIcon loadImage(String fileName) {
+	        try {
+	            return new ImageIcon(ImageIO
+	                    .read(new ConsoleStore().getClass().getResourceAsStream(fileName)));
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	            return null;
+	        }
+	    }
 
 }
